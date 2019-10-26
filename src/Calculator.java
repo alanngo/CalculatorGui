@@ -15,6 +15,9 @@ public class Calculator
 			return x-y;
 		return 0;
 	}
+	/*
+	 * Computes an infix from 2 arguments
+	 * **/
 	public static double compute(String expression)
 	{
 		Stack<String> s = new Stack<String>();
