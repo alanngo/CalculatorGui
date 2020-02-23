@@ -1,6 +1,5 @@
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import javax.swing.*;
 
 public class CalculatorPanel extends JPanel 
@@ -9,16 +8,7 @@ public class CalculatorPanel extends JPanel
 	private static final String ops = "+-*/";
 	private static final String brackets="(){}";
 	private static final String [] advanced= {"log(b, x)", "ln(x)","b^x", "e^x", "1/x"};
-	
-	private JButton [] numbers; //numbers buttons
-	private JButton [] operators; //operators buttons
-	private JButton [] group; //grouping buttons
-	private JButton [] advOps; // log, ln, exp, e, inverse
-	private JButton clearBttn;
-	private JButton equalsBttn;
-	
-	private GridBagConstraints gc;
-	
+
 	public CalculatorPanel()
 	{
 		super();
@@ -31,31 +21,35 @@ public class CalculatorPanel extends JPanel
 		setBorder(BorderFactory.createTitledBorder("Basic Calc"));
 		
 		//init buttons
-		numbers = new JButton[10]; //0-9
-		for (int i =0; i<numbers.length; i++)
+		//numbers buttons
+		JButton[] numbers = new JButton[10]; //0-9
+		for (int i = 0; i< numbers.length; i++)
 		{
 			numbers[i] = new JButton(String.valueOf(i));
 		}
-		operators = new JButton[ops.length()]; //operators
-		for (int i =0; i<operators.length; i++)
+		//operators buttons
+		JButton[] operators = new JButton[ops.length()]; //operators
+		for (int i = 0; i< operators.length; i++)
 		{
 			String op = Character.toString(ops.charAt(i));
 			operators[i]= new JButton(op);
 		}
-		group = new JButton[brackets.length()];
-		for (int i =0; i<group.length; i++)
+		//grouping buttons
+		JButton[] group = new JButton[brackets.length()];
+		for (int i = 0; i< group.length; i++)
 		{
 			String g = Character.toString(brackets.charAt(i));
 			group[i]= new JButton(g);
 		}
-		advOps = new JButton[advanced.length];
-		for (int i =0; i< advOps.length; i++)
+		// log, ln, exp, e, inverse
+		JButton[] advOps = new JButton[advanced.length];
+		for (int i = 0; i< advOps.length; i++)
 		{
 			String a = advanced[i];
 			advOps[i] = new JButton(a);
 		}
-		clearBttn = new JButton("C"); //clear
-		equalsBttn = new JButton("="); //equals
+		JButton clearBttn = new JButton("C"); //clear
+		JButton equalsBttn = new JButton("="); //equals
 
 		//implement functionality thru action listener
 		clearBttn.addActionListener( 
@@ -119,8 +113,8 @@ public class CalculatorPanel extends JPanel
 		
 		//implement the layout
 		setLayout(new GridBagLayout());
-		
-		gc = new GridBagConstraints();
+
+		GridBagConstraints gc = new GridBagConstraints();
 		
 		//spacing between elements
 		gc.weightx = 0.5;
@@ -160,7 +154,7 @@ public class CalculatorPanel extends JPanel
 		add(equalsBttn, gc);
 
 		//operators
-		for (int i =0; i<operators.length; i++)
+		for (int i = 0; i< operators.length; i++)
 		{
 			gc.gridx= 3;
 			gc.gridy= i;
@@ -168,7 +162,7 @@ public class CalculatorPanel extends JPanel
 		}
 
 		//grouping buttons
-		for (int i =0; i<group.length; i++)
+		for (int i = 0; i< group.length; i++)
 		{
 			gc.gridx= 4;
 			gc.gridy= i;
@@ -176,12 +170,12 @@ public class CalculatorPanel extends JPanel
 		}
 		
 		//advanced operations
-//		for (int i =0; i<advOps.length; i++)
-//		{
-//			gc.gridx= i;
-//			gc.gridy= 4;
-//			add(advOps[i], gc);
-//		}
+		for (int i =0; i<advOps.length; i++)
+		{
+			gc.gridx= i;
+			gc.gridy= 4;
+			add(advOps[i], gc);
+		}
 		
 	}//end of constructor
 	
@@ -192,7 +186,7 @@ public class CalculatorPanel extends JPanel
 		{
 			if (listeners[i]==CalculatorListener.class)
 			{
-				((CalculatorListener)listeners[i+1]).calcEventOccured(event);
+				((CalculatorListener)listeners[i+1]).calcEventOccurred(event);
 			}
 		}
 	}
@@ -203,7 +197,7 @@ public class CalculatorPanel extends JPanel
 		{
 			if (listeners[i]==CalculatorListener.class)
 			{
-				((CalculatorListener)listeners[i+1]).clearEventOccured(event);
+				((CalculatorListener)listeners[i+1]).clearEventOccurred(event);
 			}
 		}
 	}
@@ -214,12 +208,11 @@ public class CalculatorPanel extends JPanel
 		{
 			if (listeners[i]==CalculatorListener.class)
 			{
-				((CalculatorListener)listeners[i+1]).equalEventOccured(event);
+				((CalculatorListener)listeners[i+1]).equalEventOccurred(event);
 			}
 		}
 	}
 	
 	public void addCalcListener(CalculatorListener listener){listenerList.add(CalculatorListener.class, listener);}
-	public void removeCalcListener(CalculatorListener listener){listenerList.remove(CalculatorListener.class, listener);}
 
 }

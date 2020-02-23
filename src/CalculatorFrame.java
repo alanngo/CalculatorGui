@@ -4,7 +4,6 @@ import javax.swing.*;
 public class CalculatorFrame extends JFrame 
 {
 	private static final long serialVersionUID = 1L;
-	private CalculatorPanel panel;
 	private JTextArea area;
 	
 	public CalculatorFrame(String name)
@@ -16,20 +15,20 @@ public class CalculatorFrame extends JFrame
 		
 		//create swing components
 		area = new JTextArea();
-		panel = new CalculatorPanel();
+		CalculatorPanel panel = new CalculatorPanel();
 		
 		//add listener
 		panel.addCalcListener(
 		new CalculatorListener()
 		{
 			@Override
-			public void calcEventOccured(CalculatorEvent event) {area.append(event.getText());}
+			public void calcEventOccurred(CalculatorEvent event) {area.append(event.getText());}
 
 			@Override
-			public void clearEventOccured(ClearEvent e) {area.setText(null);}
+			public void clearEventOccurred(ClearEvent e) {area.setText(null);}
 
 			@Override
-			public void equalEventOccured(EqualEvent e) 
+			public void equalEventOccurred(EqualEvent e)
 			{
 				//does computation
 				String text = area.getText();
@@ -38,7 +37,7 @@ public class CalculatorFrame extends JFrame
 				if (text==null||text.length()==0) {throw new NullPointerException("CANNOT COMPUTE ON EMPTY TEXT");}
 				
 				//other regular cases
-				else{area.append("\n="+Double.toString(Calculator.compute(text))+"\n");}	
+				else{area.append("\n="+ Calculator.compute(text) +"\n");}
 			}	
 		});
 

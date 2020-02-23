@@ -1,18 +1,20 @@
-import java.util.Stack;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Calculator 
 {
 	private static double performOperation(double x, String op, double y)
 	{
-		if (op.equals("*"))
-			return x*y;
-		else if (op.equals("/"))
-			return x/y;
-		else if (op.equals("+"))
-			return x+y;
-		else if (op.equals("-"))
-			return x-y;
+		switch (op)
+		{
+			case "*":
+				return x * y;
+			case "/":
+				return x / y;
+			case "+":
+				return x + y;
+			case "-":
+				return x - y;
+		}
 		return 0;
 	}
 	/*
@@ -20,7 +22,7 @@ public class Calculator
 	 * **/
 	public static double compute(String expression)
 	{
-		Stack<String> s = new Stack<String>();
+		Stack<String> s = new Stack<>();
 		StringTokenizer tok = new StringTokenizer(expression, "{}()*/+-", true); //split into tokens
 		
 		while (tok.hasMoreTokens())

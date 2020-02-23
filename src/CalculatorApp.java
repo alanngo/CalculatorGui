@@ -1,7 +1,7 @@
 import javax.swing.*;
 
-public class CalculatorApp {
-
+public class CalculatorApp
+{
 	public static void main(String[] args) 
 	{
 		JFrame f = new CalculatorFrame("Calculator");
