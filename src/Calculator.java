@@ -1,5 +1,5 @@
 import java.util.*;
-
+import static java.lang.Double.*;
 public class Calculator 
 {
 	private static double performOperation(double x, String op, double y)
@@ -42,9 +42,9 @@ public class Calculator
 			{
 				try
 				{
-					double op2 = Double.parseDouble(s.pop());
+					double op2 = parseDouble(s.pop());
 					String operator = s.pop();
-					double op1 = Double.parseDouble(s.pop());
+					double op1 = parseDouble(s.pop());
 					
 					//clear } or )
 					if (!s.isEmpty())
@@ -63,6 +63,6 @@ public class Calculator
 		try {last = s.pop();}
 		catch(Exception e) {e.printStackTrace();}
 			
-		return Double.parseDouble(last);
+		return parseDouble(last);
 	}
 }

@@ -7,7 +7,7 @@ public class CalculatorPanel extends JPanel
 	private static final long serialVersionUID = 1L;
 	private static final String ops = "+-*/";
 	private static final String brackets="(){}";
-	private static final String [] advanced= {"log(b, x)", "ln(x)","b^x", "e^x", "1/x"};
+	//private static final String [] advanced= {"log(b, x)", "ln(x)","b^x", "e^x", "1/x"};
 
 	public CalculatorPanel()
 	{
@@ -42,12 +42,12 @@ public class CalculatorPanel extends JPanel
 			group[i]= new JButton(g);
 		}
 		// log, ln, exp, e, inverse
-		JButton[] advOps = new JButton[advanced.length];
-		for (int i = 0; i< advOps.length; i++)
-		{
-			String a = advanced[i];
-			advOps[i] = new JButton(a);
-		}
+//		JButton[] advOps = new JButton[advanced.length];
+//		for (int i = 0; i< advOps.length; i++)
+//		{
+//			String a = advanced[i];
+//			advOps[i] = new JButton(a);
+//		}
 		JButton clearBttn = new JButton("C"); //clear
 		JButton equalsBttn = new JButton("="); //equals
 
@@ -170,12 +170,12 @@ public class CalculatorPanel extends JPanel
 		}
 		
 		//advanced operations
-		for (int i =0; i<advOps.length; i++)
-		{
-			gc.gridx= i;
-			gc.gridy= 4;
-			add(advOps[i], gc);
-		}
+//		for (int i =0; i<advOps.length; i++)
+//		{
+//			gc.gridx= i;
+//			gc.gridy= 4;
+//			add(advOps[i], gc);
+//		}
 		
 	}//end of constructor
 	
@@ -185,9 +185,7 @@ public class CalculatorPanel extends JPanel
 		for (int i =0; i< listeners.length; i+=2)
 		{
 			if (listeners[i]==CalculatorListener.class)
-			{
 				((CalculatorListener)listeners[i+1]).calcEventOccurred(event);
-			}
 		}
 	}
 	public void fireClearEvent(ClearEvent event)
@@ -196,9 +194,7 @@ public class CalculatorPanel extends JPanel
 		for (int i =0; i< listeners.length; i+=2)
 		{
 			if (listeners[i]==CalculatorListener.class)
-			{
 				((CalculatorListener)listeners[i+1]).clearEventOccurred(event);
-			}
 		}
 	}
 	public void fireEqualEvent(EqualEvent event)
@@ -207,9 +203,7 @@ public class CalculatorPanel extends JPanel
 		for (int i =0; i< listeners.length; i+=2)
 		{
 			if (listeners[i]==CalculatorListener.class)
-			{
 				((CalculatorListener)listeners[i+1]).equalEventOccurred(event);
-			}
 		}
 	}
 	
