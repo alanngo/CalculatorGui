@@ -1,9 +1,9 @@
 package design;
 
-import event.ClearEvent;
-import event.EqualEvent;
-
+import event.*;
 import javax.swing.*;
+
+import static service.Calculator.*;
 
 public class CalculatorListenerImpl implements CalculatorListener
 {
@@ -31,6 +31,6 @@ public class CalculatorListenerImpl implements CalculatorListener
 
             //other regular cases
         else
-            area.append("\n="+ Calculator.compute(text) +"\n");
+            area.append("\n="+ compute(text) +"\n");
     }
 }

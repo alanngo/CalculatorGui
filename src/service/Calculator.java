@@ -1,3 +1,5 @@
+package service;
+
 import java.util.*;
 import static java.lang.Double.*;
 public class Calculator 

@@ -12,7 +12,40 @@ public class CalculatorPanel extends JPanel
 	private static final long serialVersionUID = 1L;
 	private static final String ops = "+-*/";
 	private static final String brackets="(){}";
-	//private static final String [] advanced= {"log(b, x)", "ln(x)","b^x", "e^x", "1/x"};
+
+	//event actions
+	void fireCalcEvent(CalculatorEvent event)
+	{
+		Object [] listeners = listenerList.getListenerList();
+		for (int i =0; i< listeners.length; i+=2)
+		{
+			if (listeners[i]== CalculatorListener.class)
+				((CalculatorListener)listeners[i+1]).calcEventOccurred(event);
+		}
+	}
+
+	void fireClearEvent(ClearEvent event)
+	{
+		Object [] listeners = listenerList.getListenerList();
+		for (int i =0; i< listeners.length; i+=2)
+		{
+			if (listeners[i]== CalculatorListener.class)
+				((CalculatorListener)listeners[i+1]).clearEventOccurred(event);
+		}
+	}
+
+	void fireEqualEvent(EqualEvent event)
+	{
+		Object [] listeners = listenerList.getListenerList();
+		for (int i =0; i< listeners.length; i+=2)
+		{
+			if (listeners[i]== CalculatorListener.class)
+				((CalculatorListener)listeners[i+1]).equalEventOccurred(event);
+		}
+	}
+
+	//handle listeners
+	void addCalcListener(CalculatorListener listener){listenerList.add(CalculatorListener.class, listener);}
 
 	public CalculatorPanel()
 	{
@@ -25,36 +58,28 @@ public class CalculatorPanel extends JPanel
 		
 		setBorder(BorderFactory.createTitledBorder("Basic Calc"));
 		
-		//init buttons
+		/*init buttons*/
+
 		//numbers buttons
 		JButton[] numbers = new JButton[10]; //0-9
 		for (int i = 0; i< numbers.length; i++)
-		{
 			numbers[i] = new JButton(String.valueOf(i));
-		}
+
 		//operators buttons
 		JButton[] operators = new JButton[ops.length()]; //operators
 		for (int i = 0; i< operators.length; i++)
-		{
-			String op = Character.toString(ops.charAt(i));
-			operators[i]= new JButton(op);
-		}
+			operators[i]= new JButton(Character.toString(ops.charAt(i)));
+
 		//grouping buttons
 		JButton[] group = new JButton[brackets.length()];
 		for (int i = 0; i< group.length; i++)
-		{
-			String g = Character.toString(brackets.charAt(i));
-			group[i]= new JButton(g);
-		}
-		// log, ln, exp, e, inverse
-//		JButton[] advOps = new JButton[advanced.length];
-//		for (int i = 0; i< advOps.length; i++)
-//		{
-//			String a = advanced[i];
-//			advOps[i] = new JButton(a);
-//		}
-		JButton clearBttn = new JButton("C"); //clear
-		JButton equalsBttn = new JButton("="); //equals
+			group[i]= new JButton(Character.toString(brackets.charAt(i)));
+
+		//clear button
+		JButton clearBttn = new JButton("C");
+
+		//equals button
+		JButton equalsBttn = new JButton("=");
 
 		//implement functionality thru action listener
 		clearBttn.addActionListener( 
@@ -174,44 +199,6 @@ public class CalculatorPanel extends JPanel
 			add(group[i], gc);
 		}
 		
-		//advanced operations
-//		for (int i =0; i<advOps.length; i++)
-//		{
-//			gc.gridx= i;
-//			gc.gridy= 4;
-//			add(advOps[i], gc);
-//		}
-		
 	}//end of constructor
-	
-	public void fireCalcEvent(CalculatorEvent event)
-	{
-		Object [] listeners = listenerList.getListenerList();
-		for (int i =0; i< listeners.length; i+=2)
-		{
-			if (listeners[i]== CalculatorListener.class)
-				((CalculatorListener)listeners[i+1]).calcEventOccurred(event);
-		}
-	}
-	public void fireClearEvent(ClearEvent event)
-	{
-		Object [] listeners = listenerList.getListenerList();
-		for (int i =0; i< listeners.length; i+=2)
-		{
-			if (listeners[i]== CalculatorListener.class)
-				((CalculatorListener)listeners[i+1]).clearEventOccurred(event);
-		}
-	}
-	public void fireEqualEvent(EqualEvent event)
-	{
-		Object [] listeners = listenerList.getListenerList();
-		for (int i =0; i< listeners.length; i+=2)
-		{
-			if (listeners[i]== CalculatorListener.class)
-				((CalculatorListener)listeners[i+1]).equalEventOccurred(event);
-		}
-	}
-	
-	public void addCalcListener(CalculatorListener listener){listenerList.add(CalculatorListener.class, listener);}
 
 }
