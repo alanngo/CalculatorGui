@@ -1,7 +1,6 @@
 package design;
 
-import event.ClearEvent;
-import event.EqualEvent;
+import event.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -14,7 +13,7 @@ public class CalculatorPanel extends JPanel
 	private static final String brackets="(){}";
 
 	//event actions
-	void fireCalcEvent(CalculatorEvent event)
+	private void fireCalcEvent(CalculatorEvent event)
 	{
 		Object [] listeners = listenerList.getListenerList();
 		for (int i =0; i< listeners.length; i+=2)
@@ -24,7 +23,7 @@ public class CalculatorPanel extends JPanel
 		}
 	}
 
-	void fireClearEvent(ClearEvent event)
+	private void fireClearEvent(ClearEvent event)
 	{
 		Object [] listeners = listenerList.getListenerList();
 		for (int i =0; i< listeners.length; i+=2)
@@ -34,7 +33,7 @@ public class CalculatorPanel extends JPanel
 		}
 	}
 
-	void fireEqualEvent(EqualEvent event)
+	private void fireEqualEvent(EqualEvent event)
 	{
 		Object [] listeners = listenerList.getListenerList();
 		for (int i =0; i< listeners.length; i+=2)
