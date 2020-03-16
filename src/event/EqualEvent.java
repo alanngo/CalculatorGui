@@ -1,3 +1,5 @@
+package event;
+
 import java.util.EventObject;
 public class EqualEvent extends EventObject
 {

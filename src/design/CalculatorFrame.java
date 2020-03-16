@@ -1,3 +1,5 @@
+package design;
+
 import java.awt.*;
 import javax.swing.*;
 

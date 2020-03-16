@@ -1,3 +1,8 @@
+package design;
+
+import event.ClearEvent;
+import event.EqualEvent;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -58,7 +63,7 @@ public class CalculatorPanel extends JPanel
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
 			{
-				fireClearEvent(new ClearEvent(this));	
+				fireClearEvent(new ClearEvent(this));
 			}
 		});
 		
@@ -184,7 +189,7 @@ public class CalculatorPanel extends JPanel
 		Object [] listeners = listenerList.getListenerList();
 		for (int i =0; i< listeners.length; i+=2)
 		{
-			if (listeners[i]==CalculatorListener.class)
+			if (listeners[i]== CalculatorListener.class)
 				((CalculatorListener)listeners[i+1]).calcEventOccurred(event);
 		}
 	}
@@ -193,7 +198,7 @@ public class CalculatorPanel extends JPanel
 		Object [] listeners = listenerList.getListenerList();
 		for (int i =0; i< listeners.length; i+=2)
 		{
-			if (listeners[i]==CalculatorListener.class)
+			if (listeners[i]== CalculatorListener.class)
 				((CalculatorListener)listeners[i+1]).clearEventOccurred(event);
 		}
 	}
@@ -202,7 +207,7 @@ public class CalculatorPanel extends JPanel
 		Object [] listeners = listenerList.getListenerList();
 		for (int i =0; i< listeners.length; i+=2)
 		{
-			if (listeners[i]==CalculatorListener.class)
+			if (listeners[i]== CalculatorListener.class)
 				((CalculatorListener)listeners[i+1]).equalEventOccurred(event);
 		}
 	}
