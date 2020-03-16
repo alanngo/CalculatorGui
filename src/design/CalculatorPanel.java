@@ -1,50 +1,15 @@
 package design;
 
 import event.*;
-
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class CalculatorPanel extends JPanel 
+public class CalculatorPanel extends HelperPanel
 {
 	private static final long serialVersionUID = 1L;
 	private static final String ops = "+-*/";
 	private static final String brackets="(){}";
-
-	//event actions
-	private void fireCalcEvent(CalculatorEvent event)
-	{
-		Object [] listeners = listenerList.getListenerList();
-		for (int i =0; i< listeners.length; i+=2)
-		{
-			if (listeners[i]== CalculatorListener.class)
-				((CalculatorListener)listeners[i+1]).calcEventOccurred(event);
-		}
-	}
-
-	private void fireClearEvent(ClearEvent event)
-	{
-		Object [] listeners = listenerList.getListenerList();
-		for (int i =0; i< listeners.length; i+=2)
-		{
-			if (listeners[i]== CalculatorListener.class)
-				((CalculatorListener)listeners[i+1]).clearEventOccurred(event);
-		}
-	}
-
-	private void fireEqualEvent(EqualEvent event)
-	{
-		Object [] listeners = listenerList.getListenerList();
-		for (int i =0; i< listeners.length; i+=2)
-		{
-			if (listeners[i]== CalculatorListener.class)
-				((CalculatorListener)listeners[i+1]).equalEventOccurred(event);
-		}
-	}
-
-	//handle listeners
-	void addCalcListener(CalculatorListener listener){listenerList.add(CalculatorListener.class, listener);}
 
 	public CalculatorPanel()
 	{
@@ -81,8 +46,7 @@ public class CalculatorPanel extends JPanel
 		JButton equalsBttn = new JButton("=");
 
 		//implement functionality thru action listener
-		clearBttn.addActionListener( 
-		new ActionListener()
+		clearBttn.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
@@ -91,8 +55,7 @@ public class CalculatorPanel extends JPanel
 			}
 		});
 		
-		equalsBttn.addActionListener( 
-		new ActionListener()
+		equalsBttn.addActionListener(new ActionListener()
 		{
 			@Override
 			public void actionPerformed(ActionEvent arg0) 
@@ -100,7 +63,8 @@ public class CalculatorPanel extends JPanel
 				fireEqualEvent(new EqualEvent(this));
 			}
 		});
-		
+
+		// for numbers operators and grouping
 		for (JButton n: numbers)
 		{
 			n.addActionListener(
@@ -148,56 +112,20 @@ public class CalculatorPanel extends JPanel
 		//spacing between elements
 		gc.weightx = 0.5;
 		gc.weighty = 0.5;
-		for (int j =1; j<=3; j++) //1-3
-		{
-			gc.gridx = j-1;
-			gc.gridy = 0;
-			add(numbers[j], gc);
-		}
-		for (int j =4; j<=6; j++)//4-6
-		{
-			gc.gridx = j-4;
-			gc.gridy = 1;
-			add(numbers[j], gc);
-		}
-		for (int j =7; j<=9; j++)//7-9
-		{
-			gc.gridx = j-7;
-			gc.gridy = 2;
-			add(numbers[j], gc);
-		}
+
+		//number buttons
+		addNumberButton(gc, 1, 3, 1,0, numbers);
+		addNumberButton(gc, 4, 6, 4,1, numbers);
+		addNumberButton(gc, 7, 9, 7,2, numbers);
 		
-		//clear button
-		gc.gridx= 0;
-		gc.gridy= 3;
-		add(clearBttn, gc);
-		
-		//0
-		gc.gridx= 1;
-		gc.gridy= 3;
-		add(numbers[0], gc);
-		
-		//equals
-		gc.gridx= 2;
-		gc.gridy= 3;
-		add(equalsBttn, gc);
+		//clear button, 0, equals
+		addButton(gc, 0, clearBttn);
+		addButton(gc, 1, numbers[0]);
+		addButton(gc, 2, equalsBttn);
 
 		//operators
-		for (int i = 0; i< operators.length; i++)
-		{
-			gc.gridx= 3;
-			gc.gridy= i;
-			add(operators[i], gc);
-		}
-
-		//grouping buttons
-		for (int i = 0; i< group.length; i++)
-		{
-			gc.gridx= 4;
-			gc.gridy= i;
-			add(group[i], gc);
-		}
+		addButton(gc, 3, operators);
+		addButton(gc, 4, group);
 		
 	}//end of constructor
-
 }
