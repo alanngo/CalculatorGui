@@ -8,7 +8,7 @@ public class CalculatorApp
 		f.setSize(600, 200);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setVisible(true);
-		//blahblahblah
+
 	}
 
 }
